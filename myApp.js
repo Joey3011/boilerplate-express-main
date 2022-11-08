@@ -3,8 +3,8 @@ let express = require('express');
 let app = express();
 
 
-app.get('^/$', (req, res, next) => {
-    console.log(`${req.method} ${req.path} ${req.ip}`);
+app.use( (req, res, next) => {
+    console.log(req.method + " " + req.path + "-" + req.ip);
     next();
 })
 
