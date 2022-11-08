@@ -4,7 +4,7 @@ let app = express();
 
 
 app.get('/:word/echo', (req, res) => {
-    res.json(`echo: ${req.params.word}`)
+    res.json({word: req.params.word})
 })
 
 app.get('/now', (req, res, next) => {
