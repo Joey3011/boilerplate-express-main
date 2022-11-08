@@ -52,6 +52,11 @@ app.get("^/json", (req, res) => {
     res.json(jsonResponse)
 })
 
+app.post("/name", (req, res) => {
+    console.log(req.body.first + " " + req.body.last)
+    res.json({name: req.body.first + " " + req.body.last})
+})
+
 
 
 
