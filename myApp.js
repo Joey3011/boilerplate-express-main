@@ -3,7 +3,16 @@ let app = express();
 
 
 
-app.use(express.static(__dirname + '/public'))
+
+
+
+app.get("^/json", (req, res) => {
+    res.json({ message: 'Hello json' })
+})
+
+app.use("/public", express.static(__dirname + "/public"))
+
+
 
 app.get('^/$|/index(.html)?', (req, res) => {
     res.sendFile(__dirname + '/views/index.html')
