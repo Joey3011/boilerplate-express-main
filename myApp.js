@@ -3,7 +3,15 @@ let express = require('express');
 let app = express();
 
 
-app.use( (req, res, next) => {
+app.get('/now', (req, res, next) => {
+    req.time = new Date().toString()
+    next()
+}, (req, res) => {
+    res.json( {time: req.time} )
+})
+
+
+app.use((req, res, next) => {
     console.log(req.method + " " + req.path + " - " + req.ip);
     next();
 })
