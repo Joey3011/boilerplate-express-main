@@ -1,7 +1,27 @@
 require('dotenv').config()
 let express = require('express');
 let app = express();
+let bodyParser = require('body-parser')
 
+
+console.log("Hello world")
+
+app.use("/public", express.static(__dirname + "/public"))
+
+app.use(bodyParser.urlencoded( { extended: false } ) )
+
+
+app.get('^/$|/index(.html)?', (req, res) => {
+    res.sendFile(__dirname + '/views/index.html')
+})
+
+app.get("^/json", (req, res) => {
+    var jsonResponse = { message : "Hello json" }
+    if (process.env.MESSAGE_STYLE  === 'uppercase'){
+        jsonResponse.message  = jsonResponse.message.toUpperCase()
+    }
+    res.json(jsonResponse)
+})
 
 app.get('/name', (req, res) => {
    res.json({name: req.query.first + " " + req.query.last})
@@ -32,15 +52,13 @@ app.get("^/json", (req, res) => {
     res.json(jsonResponse)
 })
 
-app.use("/public", express.static(__dirname + "/public"))
 
 
 
-app.get('^/$|/index(.html)?', (req, res) => {
-    res.sendFile(__dirname + '/views/index.html')
-})
 
-console.log("Hello world")
+
+
+
 
 
 
